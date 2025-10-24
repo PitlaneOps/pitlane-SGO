@@ -1,0 +1,192 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+enum Role {
+  admin
+  user
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  role           Role            @default(user)
+  accounts       Account[]
+  sessions       Session[]
+  onrampSessions OnrampSession[]
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+enum ResourceType {
+  http
+}
+
+model Resources {
+  id          String       @id @default(uuid())
+  resource    String       @unique
+  type        ResourceType
+  x402Version Int
+  lastUpdated DateTime
+  metadata    Json?
+
+  originId String
+
+  accepts Accepts[]
+  response ResourceResponse?
+  origin ResourceOrigin @relation(fields: [originId], references: [id], map: "Resources_origin_fkey")
+}
+
+enum AcceptsScheme {
+  exact
+}
+
+enum AcceptsNetwork {
+  base_sepolia
+  avalanche_fuji
+  base
+  sei
+  sei_testnet
+  avalanche
+  iotex
+  solana_devnet
+  solana
+  polygon
+  optimism
+}
+
+model Accepts {
+  id                String         @id @default(uuid())
+  resourceId        String
+  scheme            AcceptsScheme
+  description       String
+  network           AcceptsNetwork
+  maxAmountRequired BigInt
+  resource          String
+  mimeType          String
+  payTo             String
+  maxTimeoutSeconds Int
+  asset             String
+  outputSchema      Json?
+  extra             Json?
+
+  resourceRel Resources @relation(fields: [resourceId], references: [id])
+
+  @@unique([resourceId, scheme, network])
+}
+
+model News {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  image       String
+  link        String
+  favicon     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ResourceOrigin {
+  id     String @id @default(uuid())
+  origin String @unique
+
+  title       String?
+  description String?
+  favicon     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  resources Resources[]
+  ogImages  OgImage[]
+}
+
+model ResourceResponse {
+  id          String  @id @default(uuid())
+  resourceId  String  @unique
+  response    Json
+
+  resource Resources @relation(fields: [resourceId], references: [id])
+}
+
+model OgImage {
+  id          String  @id @default(uuid())
+  originId    String
+  url         String  @unique
+  height      Int?
+  width       Int?
+  title       String?
+  description String?
+
+  origin ResourceOrigin @relation(fields: [originId], references: [id], map: "OgImage_origin_fkey")
+
+  @@unique([originId, url])
+}
+
+model OnrampSession {
+  id            String   @id @default(uuid())
+  token         String   @unique
+  amount        Int
+  userId        String
+  date          DateTime @default(now())
+  txHash        String?  @unique
+  failureReason String?
+  status SessionStatus @default(ONRAMP_TRANSACTION_STATUS_IN_PROGRESS)
+
+  user   User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum SessionStatus {
+  ONRAMP_TRANSACTION_STATUS_IN_PROGRESS
+  ONRAMP_TRANSACTION_STATUS_SUCCESS
+  ONRAMP_TRANSACTION_STATUS_FAILED
+}

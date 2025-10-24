@@ -1,0 +1,25 @@
+# Generated files
+**/generated/**
+**/dist/**
+**/build/**
+
+# Node modules
+node_modules/
+**/node_modules/**
+
+# Build outputs
+.next/
+**/.next/**
+
+# Lock files
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Coverage reports
+coverage/
+**/coverage/**
+
+# Other generated/compiled files
+*.tsbuildinfo
+**/*.tsbuildinfo 

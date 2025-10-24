@@ -1,0 +1,41 @@
+name: Checks
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  checks:
+    name: Run Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm db:generate
+
+      - name: Check Formatting
+        run: pnpm check:format
+
+      - name: Check Knip
+        run: pnpm knip
+
+      - name: Check Types
+        run: pnpm check:types
+
+      - name: Check Lint
+        run: pnpm lint
