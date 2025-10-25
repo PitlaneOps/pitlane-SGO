@@ -17,7 +17,7 @@ import { LogoContainer } from './_components/layout/logo';
 import { NavbarSearchButton } from './_components/layout/navbar/search';
 import { NavbarAuthButton } from './_components/layout/navbar/auth-button';
 
-import { SolanaProvider } from './_contexts/solana';
+import { BSCProvider } from './_contexts/bsc';
 import { SearchProvider } from './_contexts/search/provider';
 import { PostHogProvider } from './_contexts/posthog';
 import { ChainProvider } from './_contexts/chain/provider';
@@ -47,14 +47,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'xgrain402-scan • Solana Payment Rail Explorer',
+    default: 'xgrain402-scan • BSC Payment Rail Explorer',
     template: '%s | xgrain402-scan',
   },
   description:
-    'Explore the xgrain402 Solana ecosystem. View transactions, facilitators, programs and resources. Scaling microtransactions to machine economies.',
+    'Explore the xgrain402 BSC ecosystem. View transactions, facilitators, programs and resources. Scaling microtransactions to machine economies.',
   keywords: [
     'xgrain402',
-    'solana',
+    'bsc',
+    'binance smart chain',
     'blockchain',
     'ecosystem',
     'transactions',
@@ -62,7 +63,7 @@ export const metadata: Metadata = {
     'machine economies',
     'crypto',
     'web3',
-    'solana explorer',
+    'bsc explorer',
     'analytics',
     'facilitators',
   ],
@@ -84,16 +85,16 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: env.NEXT_PUBLIC_APP_URL,
-    title: 'xgrain402-scan • Solana Payment Rail Explorer',
+    title: 'xgrain402-scan • BSC Payment Rail Explorer',
     description:
-      'Explore the xgrain402 Solana ecosystem. View transactions, facilitators, programs and resources. Scaling microtransactions to machine economies.',
+      'Explore the xgrain402 BSC ecosystem. View transactions, facilitators, programs and resources. Scaling microtransactions to machine economies.',
     siteName: 'xgrain402-scan',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'xgrain402-scan • Solana Payment Rail Explorer',
+    title: 'xgrain402-scan • BSC Payment Rail Explorer',
     description:
-      'Explore the xgrain402 Solana ecosystem. View transactions, facilitators, programs and resources. Scaling microtransactions to machine economies.',
+      'Explore the xgrain402 BSC ecosystem. View transactions, facilitators, programs and resources. Scaling microtransactions to machine economies.',
     creator: '@xgrain402',
   },
   appleWebApp: {
@@ -133,7 +134,7 @@ export default async function RootLayout({
           <ChainProvider>
             <TRPCReactProvider>
               <SearchProvider>
-                <SolanaProvider>
+                <BSCProvider>
                   <PostHogProvider>
                       <ThemeProvider
                         attribute="class"
@@ -183,7 +184,7 @@ export default async function RootLayout({
                         </div>
                       </ThemeProvider>
                   </PostHogProvider>
-                </SolanaProvider>
+                </BSCProvider>
               </SearchProvider>
             </TRPCReactProvider>
           </ChainProvider>

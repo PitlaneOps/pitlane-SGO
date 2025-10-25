@@ -1,15 +1,22 @@
-export type SolanaAddress = string & { readonly __brand: unique symbol };
-export type MixedAddress = SolanaAddress;
+export type BSCAddress = `0x${string}`;
+export type SolanaAddress = BSCAddress; // Backward compatibility
+export type MixedAddress = BSCAddress;
 
-// Helper function to validate Solana addresses
-export const isSolanaAddress = (address: string): address is SolanaAddress => {
-  // Basic Solana address validation (base58, 32-44 characters)
-  return /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(address);
+// Helper function to validate BSC/EVM addresses
+export const isBSCAddress = (address: string): address is BSCAddress => {
+  // EVM address validation (0x followed by 40 hex characters)
+  return /^0x[a-fA-F0-9]{40}$/.test(address);
 };
 
-export const createSolanaAddress = (address: string): SolanaAddress => {
-  if (!isSolanaAddress(address)) {
-    throw new Error('Invalid Solana address format');
+// Backward compatibility alias
+export const isSolanaAddress = isBSCAddress;
+
+export const createBSCAddress = (address: string): BSCAddress => {
+  if (!isBSCAddress(address)) {
+    throw new Error('Invalid BSC address format');
   }
-  return address as SolanaAddress;
+  return address as BSCAddress;
 };
+
+// Backward compatibility alias
+export const createSolanaAddress = createBSCAddress;

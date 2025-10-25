@@ -2,32 +2,32 @@
 
 import { Wallet } from 'lucide-react';
 
-import { useWallet } from '@solana/wallet-adapter-react';
+import { useAccount } from 'wagmi';
 
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
-import { useSolanaBalance } from '@/app/_hooks/use-solana-balance';
+import { useBSCBalance } from '@/app/_hooks/use-bsc-balance';
 
-import { SolanaWalletButton } from '../../wallet/solana-wallet-button';
+import { BSCWalletButton } from '../../wallet/bsc-wallet-button';
 
 export const NavbarAuthButton = () => {
-  const { publicKey, connected } = useWallet();
+  const { address, isConnected } = useAccount();
 
   return (
     <>
-      {connected && publicKey ? (
+      {isConnected && address ? (
         <ConnectedButton />
       ) : (
-        <SolanaWalletButton />
+        <BSCWalletButton />
       )}
     </>
   );
 };
 
 const ConnectedButton = ({ onClick }: { onClick?: () => void }) => {
-  const { publicKey } = useWallet();
-  const { balance, isLoading } = useSolanaBalance(publicKey?.toString());
+  const { address } = useAccount();
+  const { balance, isLoading } = useBSCBalance(address);
 
   return (
     <Button size="navbar" variant="outline" onClick={onClick}>
@@ -39,10 +39,10 @@ const ConnectedButton = ({ onClick }: { onClick?: () => void }) => {
           undefined,
           {
             minimumFractionDigits: 0,
-            maximumFractionDigits: 2,
+            maximumFractionDigits: 4,
             notation: 'compact',
           }
-        )} SOL`}</span>
+        )} BNB`}</span>
       )}
     </Button>
   );

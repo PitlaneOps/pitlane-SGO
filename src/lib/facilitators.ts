@@ -1,6 +1,6 @@
 import { Chain } from '@/types/chain';
 
-import type { MixedAddress, SolanaAddress } from '@/types/address';
+import type { MixedAddress, BSCAddress } from '@/types/address';
 import { mixedAddressSchema } from './schemas';
 
 export type Facilitator = {
@@ -18,18 +18,18 @@ const xgrainFacilitator: Facilitator = {
   image: '/xgrain402.png',
   link: 'https://explorer.xgrain402.xyz',
   addresses: {
-    [Chain.SOLANA]: ['9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM' as SolanaAddress],
+    [Chain.BSC]: ['0x9W7DXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAW' as BSCAddress],
   },
   color: 'var(--color-primary)',
 };
 
-const solanaProgramFacilitator: Facilitator = {
-  id: 'solana-program',
-  name: 'Solana Program' as const,
-  image: '/solana.png',
-  link: 'https://solana.com',
+const bscProgramFacilitator: Facilitator = {
+  id: 'bsc-program',
+  name: 'BSC Program' as const,
+  image: '/bsc.png',
+  link: 'https://www.bnbchain.org',
   addresses: {
-    [Chain.SOLANA]: ['So11111111111111111111111111111111111111112' as SolanaAddress],
+    [Chain.BSC]: ['0x0000000000000000000000000000000000000000' as BSCAddress],
   },
   color: 'var(--color-orange-600)',
 };
@@ -40,8 +40,8 @@ const payAiFacilitator: Facilitator = {
   image: '/payai.png',
   link: 'https://payai.network',
   addresses: {
-    [Chain.SOLANA]: [
-      '2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDBg4' as SolanaAddress,
+    [Chain.BSC]: [
+      '0x2wKupLR9q6wXYppw8Gr2NvWxKBUqm4PPJKkQfoxHDB' as BSCAddress,
     ],
   },
   color: 'var(--color-purple-600)',
@@ -53,7 +53,7 @@ const aurraCloudFacilitator: Facilitator = {
   image: '/aurracloud.png',
   link: 'https://aurracloud.com',
   addresses: {
-    [Chain.SOLANA]: ['AuRRaC1oud7nWzF84cL1JeYuLqBrAg1NBfZGe4GkgPHv' as SolanaAddress],
+    [Chain.BSC]: ['0xAuRRaC1oud7nWzF84cL1JeYuLqBrAg1NBfZGe4GkgP' as BSCAddress],
   },
   color: 'var(--color-yellow-600)',
 };
@@ -62,9 +62,9 @@ const thirdwebFacilitator: Facilitator = {
   id: 'thirdweb',
   name: 'thirdweb' as const,
   image: '/thirdweb.png',
-  link: 'https://portal.thirdweb.com/solana',
+  link: 'https://portal.thirdweb.com/',
   addresses: {
-    [Chain.SOLANA]: ['ThrdW3b1111111111111111111111111111111111111' as SolanaAddress],
+    [Chain.BSC]: ['0xThrdW3b1111111111111111111111111111111111' as BSCAddress],
   },
   color: 'var(--color-pink-600)',
 };
@@ -75,8 +75,8 @@ const corbitsFacilitator: Facilitator = {
   image: '/corbits.png',
   link: 'https://corbits.dev',
   addresses: {
-    [Chain.SOLANA]: [
-      'AepWpq3GQwL8CeKMtZyKtKPa7W91Coygh3ropAJapVdU' as SolanaAddress,
+    [Chain.BSC]: [
+      '0xAepWpq3GQwL8CeKMtZyKtKPa7W91Coygh3ropAJapV' as BSCAddress,
     ],
   },
   color: 'var(--color-orange-600)',
@@ -84,7 +84,7 @@ const corbitsFacilitator: Facilitator = {
 
 export const facilitators: Facilitator[] = [
   xgrainFacilitator,
-  solanaProgramFacilitator,
+  bscProgramFacilitator,
   payAiFacilitator,
   aurraCloudFacilitator,
   thirdwebFacilitator,

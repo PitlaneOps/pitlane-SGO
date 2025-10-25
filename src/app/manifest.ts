@@ -5,12 +5,12 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'xgrain402-scan',
     short_name: 'xgrain402-scan',
     description:
-      'Explore the xgrain402 Solana ecosystem. View transactions, facilitators, programs and resources. Scaling microtransactions to machine economies.',
+      'Explore the xgrain402 BSC ecosystem. View transactions, facilitators, programs and resources. Scaling microtransactions to machine economies.',
     start_url: '/',
     display: 'standalone',
     theme_color: '#ffffff',
     background_color: '#ffffff',
-    categories: ['solana', 'blockchain', 'payments', 'microtransactions', 'developers'],
+    categories: ['bsc', 'binance smart chain', 'blockchain', 'payments', 'microtransactions', 'developers'],
     icons: [
       {
         src: '/manifest/192x192.png',

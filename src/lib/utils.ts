@@ -57,9 +57,11 @@ export const getPercentageFromBigInt = (previous: bigint, current: bigint) => {
   return ((Number(current) - Number(previous)) / Number(previous)) * 100;
 };
 
+// BNB is the native token on BSC, no address needed (use 0x0 for native)
 export const USDC_ADDRESS: Record<Chain, string> = {
   [Chain.BASE]: '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913',
-  [Chain.SOLANA]: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+  [Chain.BSC]: '0x0000000000000000000000000000000000000000', // Native BNB
+  [Chain.SOLANA]: '0x0000000000000000000000000000000000000000', // Backward compatibility
   [Chain.POLYGON]: '0x3c499c542cef5e3811e1192ce70d8cc03d5c3359',
   [Chain.OPTIMISM]: '0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85',
 };

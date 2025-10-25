@@ -98,10 +98,13 @@ enum AcceptsNetwork {
   sei_testnet
   avalanche
   iotex
-  solana_devnet
-  solana
+  bsc_testnet
+  bsc
   polygon
   optimism
+  // Backward compatibility
+  solana_devnet
+  solana
 }
 
 model Accepts {

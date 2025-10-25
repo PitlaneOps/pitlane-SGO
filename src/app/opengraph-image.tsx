@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
 
-export const alt = 'xgrain402-scan • Solana Payment Rail Explorer';
+export const alt = 'xgrain402-scan • BSC Payment Rail Explorer';
 export const size = {
   width: 1200,
   height: 630,
@@ -106,7 +106,7 @@ export default async function Image() {
               textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
             }}
           >
-            Solana Payment Rail Explorer
+            BSC Payment Rail Explorer
           </div>
 
           {/* Description */}
